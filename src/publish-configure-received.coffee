@@ -14,11 +14,20 @@ class PublishConfigureReceived
     callback null, response
 
   do: (request, callback) =>
-    {toUuid} = request.metadata
-    message = JSON.stringify @_buildMessage request
-    @_send {toUuid, message}, (error) =>
+    {fromUuid, toUuid, route} = request.metadata
+    lastHop = _.first route
+    return @_doCallback request, 422, callback unless fromUuid?
+    return @_doCallback request, 422, callback unless toUuid?
+    return @_doCallback request, 422, callback unless lastHop?
+    return @_doCallback request, 204, callback unless lastHop.from == lastHop.to && lastHop.type == 'configure.received'
+
+    @uuidAliasResolver.resolve toUuid, (error, toUuid) =>
       return callback error if error?
-      return @_doCallback request, 204, callback
+
+      message = JSON.stringify @_buildMessage request
+      @_send {toUuid, message}, (error) =>
+        return callback error if error?
+        return @_doCallback request, 204, callback
 
   _buildMessage: (request) =>
     return {
@@ -28,8 +37,6 @@ class PublishConfigureReceived
     }
 
   _send: ({toUuid, message}, callback=->) =>
-    @uuidAliasResolver.resolve toUuid, (error, uuid) =>
-      return callback error if error?
-      @cache.publish "#{uuid}", message, callback
+    @cache.publish "#{toUuid}", message, callback
 
 module.exports = PublishConfigureReceived
