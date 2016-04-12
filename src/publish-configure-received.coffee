@@ -15,7 +15,7 @@ class PublishConfigureReceived
 
   do: (request, callback) =>
     {fromUuid, toUuid, route} = request.metadata
-    lastHop = _.first route
+    lastHop = _.last route
     return @_doCallback request, 422, callback unless fromUuid?
     return @_doCallback request, 422, callback unless toUuid?
     return @_doCallback request, 422, callback unless lastHop?

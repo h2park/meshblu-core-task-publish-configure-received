@@ -32,8 +32,8 @@ describe 'PublishConfigureReceived', ->
             toUuid: 'receiver-uuid'
             fromUuid: 'receiver-uuid'
             route: [
-              {type: 'configure.received', from: 'receiver-uuid', to: 'receiver-uuid'}
               {type: 'configure.sent',     from: 'sender-uuid',   to: 'receiver-uuid'}
+              {type: 'configure.received', from: 'receiver-uuid', to: 'receiver-uuid'}
             ]
           rawData: '{"does_not":"matter"}'
 
@@ -55,8 +55,8 @@ describe 'PublishConfigureReceived', ->
         expect(JSON.parse @message).to.deep.equal {
           metadata:
             route: [
-              {type: 'configure.received', from: 'receiver-uuid', to: 'receiver-uuid'}
               {type: 'configure.sent',     from: 'sender-uuid',   to: 'receiver-uuid'}
+              {type: 'configure.received', from: 'receiver-uuid', to: 'receiver-uuid'}
             ]
           rawData: '{"does_not":"matter"}'
         }
@@ -76,8 +76,8 @@ describe 'PublishConfigureReceived', ->
             toUuid: 'muggle-mouth'
             fromUuid: 'sender-uuid'
             route: [
-              {type: 'configure.received', from: 'receiver-uuid', to: 'receiver-uuid'}
               {type: 'configure.sent',     from: 'sender-uuid', to: 'receiver-uuid'}
+              {type: 'configure.received', from: 'receiver-uuid', to: 'receiver-uuid'}
             ]
             messageType: 'sent'
           rawData: '{"does_not":"matter"}'
@@ -101,8 +101,8 @@ describe 'PublishConfigureReceived', ->
         expect(JSON.parse @message).to.deep.equal {
           metadata:
             route: [
-              {type: 'configure.received', from: 'receiver-uuid', to: 'receiver-uuid'}
               {type: 'configure.sent',     from: 'sender-uuid',   to: 'receiver-uuid'}
+              {type: 'configure.received', from: 'receiver-uuid', to: 'receiver-uuid'}
             ]
           rawData: '{"does_not":"matter"}'
         }
