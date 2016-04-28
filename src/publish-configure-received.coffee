@@ -1,4 +1,4 @@
-_ = require 'lodash'
+_    = require 'lodash'
 http = require 'http'
 
 class PublishConfigureReceived
@@ -32,6 +32,7 @@ class PublishConfigureReceived
   _buildMessage: (request) =>
     return {
       metadata:
+        responseId: request.metadata.responseId
         route: request.metadata.route
       rawData: request.rawData
     }

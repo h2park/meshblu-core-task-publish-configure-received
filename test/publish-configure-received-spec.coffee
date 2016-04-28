@@ -54,6 +54,7 @@ describe 'PublishConfigureReceived', ->
         expect(@message).to.exist
         expect(JSON.parse @message).to.deep.equal {
           metadata:
+            responseId: 'its-electric'
             route: [
               {type: 'configure.sent',     from: 'sender-uuid',   to: 'receiver-uuid'}
               {type: 'configure.received', from: 'receiver-uuid', to: 'receiver-uuid'}
@@ -100,6 +101,7 @@ describe 'PublishConfigureReceived', ->
         expect(@message).to.exist
         expect(JSON.parse @message).to.deep.equal {
           metadata:
+            responseId: 'its-electric'
             route: [
               {type: 'configure.sent',     from: 'sender-uuid',   to: 'receiver-uuid'}
               {type: 'configure.received', from: 'receiver-uuid', to: 'receiver-uuid'}
