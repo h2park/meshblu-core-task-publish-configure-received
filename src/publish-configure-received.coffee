@@ -3,7 +3,10 @@ http = require 'http'
 
 class PublishConfigureReceived
   constructor: (options={}) ->
-    {@cache,@uuidAliasResolver} = options
+    {
+      @firehoseClient
+      @uuidAliasResolver
+    } = options
 
   _doCallback: (request, code, callback) =>
     response =
@@ -39,6 +42,6 @@ class PublishConfigureReceived
     }
 
   _send: ({toUuid, message}, callback=->) =>
-    @cache.publish "#{toUuid}", message, callback
+    @firehoseClient.publish "#{toUuid}", message, callback
 
 module.exports = PublishConfigureReceived

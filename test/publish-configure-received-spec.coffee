@@ -8,7 +8,7 @@ describe 'PublishConfigureReceived', ->
     @redisKey = uuid.v1()
     @uuidAliasResolver = resolve: sinon.stub().yields null, 'receiver-uuid'
     options = {
-      cache: redis.createClient(@redisKey)
+      firehoseClient: redis.createClient(@redisKey)
       @uuidAliasResolver
     }
 
